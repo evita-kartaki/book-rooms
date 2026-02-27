@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'api',
+    'bookrooms_service.api',
     'corsheaders'
 ]
 
@@ -55,7 +55,7 @@ MIDDLEWARE = [ 'django.middleware.security.SecurityMiddleware',
               'django.contrib.messages.middleware.MessageMiddleware', 
               'django.middleware.clickjacking.XFrameOptionsMiddleware' ]
 
-ROOT_URLCONF = 'bookrooms_service.urls'
+ROOT_URLCONF = 'bookrooms_service.bookrooms_service.urls'
 
 TEMPLATES = [
     {
@@ -72,8 +72,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'bookrooms_service.wsgi.application'
-
+WSGI_APPLICATION = 'bookrooms_service.bookrooms_service.wsgi.application'
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
