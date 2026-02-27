@@ -2,20 +2,22 @@
 
 Full-stack web application for booking university rooms.
 
+---
+
 ## Tech Stack
 
-Backend:
+### Backend
 - Django
 - Django REST Framework
 - JWT Authentication
 
-Frontend:
+### Frontend
 - React (Vite)
 - Fetch API
 
 ---
 
-# Backend Setup
+## Backend Setup
 
 ```bash
 cd backend
@@ -24,10 +26,25 @@ source venv/bin/activate
 pip install -r requirements.txt   # or install packages manually
 python manage.py migrate
 python manage.py runserver
+```
 
-## Frontend 
+---
 
-#Then run: 
+## Frontend Setup
+
+```bash
+cd frontend
+npm install
 npm run dev
-#Frontend runs at:
-http://localhost:5173
+```
+
+---
+
+## Application URLs
+
+| Service  | URL |
+|----------|------|
+| Backend  | http://127.0.0.1:8000 |
+| Frontend | http://localhost:5173 |
+
+---
