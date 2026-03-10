@@ -45,6 +45,8 @@ class User(AbstractUser):
             blank=True,
             null=True
         )
+
+        is_admin = models.BooleanField(default=False)
         
         def generate_jwt(self):
             payload = {
@@ -60,11 +62,24 @@ class User(AbstractUser):
             return f"{self.username} ({self.role})"
         
 class Booking(models.Model):
+
+    STATUS_CHOICES = (
+            ('UPCOMING', 'Upcoming'),
+            ('CANCELLED', 'Cancelled'),
+            ('COMPLETED', 'Completed'),
+        )
+
+
     Booking_id = models.AutoField(primary_key=True)
     User_id = models.ForeignKey(User, on_delete=models.CASCADE)
     Room_id = models.ForeignKey(Room, on_delete=models.CASCADE)
     Start_time = models.DateTimeField()
     End_time = models.DateTimeField()
+    Status = models.CharField(
+        max_length=20, 
+        choices=STATUS_CHOICES, 
+        default='UPCOMING'
+    )
 
     def __str__(self):
         return f"Booking {self.Booking_id} by {self.User_id} for {self.Room_id}"      

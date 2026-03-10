@@ -78,3 +78,23 @@ class BookingViewSet(viewsets.ModelViewSet):
     serializer_class = BookingSerializer
     permission_classes = [HasRolePermission]
     allowed_roles = ["admin", "client"]
+
+    queryset = Booking.objects.all()
+    serializer_status = BookingSerializer
+
+    @action(detail=True, methods=['patch'])
+    def update_status(self, request, pk=None):
+        booking = self.get_object()
+        new_status = request.data.get('Status')
+
+        # Έλεγχος αν το status που στάλθηκε είναι έγκυρο
+        valid_statuses = [choice[0] for choice in Booking.STATUS_CHOICES]
+        if new_status not in valid_statuses:
+            return Response(
+                {"error": f"Invalid status. Choose from: {valid_statuses}"},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        booking.Status = new_status
+        booking.save()
+        return Response({'message': f'Status updated to {new_status}'})
