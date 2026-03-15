@@ -82,6 +82,53 @@ class BookingViewSet(viewsets.ModelViewSet):
     queryset = Booking.objects.all()
     serializer_status = BookingSerializer
 
+
+    @action(detail=False, methods=["GET"], url_path="calendar")
+    def calendar(self, request):
+        """
+        GET /api/bookings/calendar/?room_id=1&start_date=2026-03-01&end_date=2026-03-31
+        Επιστρέφει τις κρατήσεις μιας αίθουσας μέσα σε ένα εύρος ημερομηνιών.
+        """
+        room_id = request.query_params.get("room_id")
+        start_date_str = request.query_params.get("start_date")
+        end_date_str = request.query_params.get("end_date")
+
+        if not room_id or not start_date_str or not end_date_str:
+            raise ValidationError("Πρέπει να δώσεις room_id, start_date, end_date (π.χ. start_date=2026-03-01)")
+
+        try:
+   
+            start_naive = datetime.strptime(start_date_str, "%Y-%m-%d")
+            
+            end_naive = datetime.strptime(end_date_str, "%Y-%m-%d").replace(hour=23, minute=59, second=59)
+        except ValueError:
+            raise ValidationError("Λάθος format. Το start_date και end_date πρέπει να είναι YYYY-MM-DD")
+
+    
+    
+        start_dt = timezone.make_aware(start_naive, timezone.get_current_timezone())
+        end_dt = timezone.make_aware(end_naive, timezone.get_current_timezone())
+
+
+        bookings = Booking.objects.filter(
+            Room_id=room_id,
+            Start_time__lt=end_dt,
+            End_time__gt=start_dt
+        )
+
+        # Φτιάχνουμε τα δεδομένα που θα σταλούν στο Frontend
+        data = []
+        for b in bookings:
+            data.append({
+                "room_in_db": b.Room_id_id,
+                "start_time": b.Start_time,
+                "end_time": b.End_time,
+                "status": b.Status
+            })
+
+        return Response(data)
+    
+    #--UPDATE STATUS ---
     @action(detail=True, methods=['patch'])
     def update_status(self, request, pk=None):
         booking = self.get_object()
