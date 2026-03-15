@@ -2,15 +2,19 @@
 
 from datetime import datetime
 from django.utils import timezone
-from rest_framework import viewsets
+from django.contrib.auth import authenticate
+from rest_framework import viewsets,status
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.exceptions import ValidationError
+from rest_framework import status
+from rest_framework.views import APIView
+from rest_framework_simplejwt.tokens import RefreshToken
 
 from .permissions import HasRolePermission
 from .models import Room, Category, User, Booking
 from .serializers import RoomSerializer, CategorySerializer, UserSerializer, BookingSerializer
-
+from .serializers import MyTokenObtainPairSerializer
 
 class RoomViewSet(viewsets.ModelViewSet):
     queryset = Room.objects.all()
@@ -78,8 +82,6 @@ class BookingViewSet(viewsets.ModelViewSet):
     serializer_class = BookingSerializer
     permission_classes = [HasRolePermission]
     allowed_roles = ["admin", "client"]
-
-    queryset = Booking.objects.all()
     serializer_status = BookingSerializer
 
 
@@ -145,3 +147,39 @@ class BookingViewSet(viewsets.ModelViewSet):
         booking.Status = new_status
         booking.save()
         return Response({'message': f'Status updated to {new_status}'})
+    
+# Πρόσθεσε αυτό το import στην κορυφή
+from .serializers import MyTokenObtainPairSerializer
+
+class LoginView(APIView):
+    def post(self, request):
+        username = request.data.get('username')
+        password = request.data.get('password')
+
+        user = authenticate(username=username, password=password)
+
+        if user is not None:
+            # Χρήση του custom serializer για να μπει το role μέσα στο token
+            serializer = MyTokenObtainPairSerializer()
+            refresh = serializer.get_token(user)
+            
+            return Response({
+                'refresh': str(refresh),
+                'access': str(refresh.access_token),
+                'user': {
+                    'id': user.id,
+                    'username': user.username,
+                    'role': user.role
+                }
+            }, status=status.HTTP_200_OK)
+        
+        return Response({'error': 'Invalid Credentials'}, status=status.HTTP_401_UNAUTHORIZED)
+
+
+class LogoutView(APIView):
+    """
+    POST /api/logout/
+    Στο JWT το logout γίνεται κυρίως στο Frontend σβήνοντας το token.
+    """
+    def post(self, request):
+        return Response({'message': 'Αποσυνδεθήκατε με επιτυχία'}, status=status.HTTP_200_OK)

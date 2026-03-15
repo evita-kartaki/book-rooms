@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import Room,Category,User,Booking 
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
 class RoomSerializer(serializers.ModelSerializer):
     class Meta:
@@ -26,3 +27,15 @@ class BookingSerializer(serializers.ModelSerializer):
         if user.is_authenticated:
             return Booking.objects.filter(User_id=user) 
         return Booking.objects.none()    
+    
+class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
+    @classmethod
+    def get_token(cls, user):
+        token = super().get_token(user)
+
+        # Πρόσθεσε τα custom πεδία που θέλεις στο token
+        token['role'] = user.role
+        token['username'] = user.username
+        # Μπορείς να προσθέσεις ό,τι άλλο θέλεις, π.χ. token['is_admin'] = user.is_admin
+
+        return token
