@@ -119,7 +119,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = "Europe/Athens"
 
 USE_I18N = True
 
@@ -155,3 +155,16 @@ SIMPLE_JWT = {
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
 ]
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
+DEFAULT_FROM_EMAIL = os.getenv("EMAIL_HOST_USER")
+GOOGLE_CLIENT_ID = os.getenv("GOOGLE_CLIENT_ID")
+
+print("EMAIL_HOST_USER =", repr(EMAIL_HOST_USER))
+print("EMAIL_HOST_PASSWORD =", repr(EMAIL_HOST_PASSWORD))
+print("DEFAULT_FROM_EMAIL =", repr(DEFAULT_FROM_EMAIL))

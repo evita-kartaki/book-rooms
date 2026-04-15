@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.conf import settings
-from datetime import timezone, timedelta
+from datetime import timezone
 from django.utils import timezone
 import jwt
 
@@ -23,6 +23,7 @@ class Room(models.Model):
     Capacity = models.IntegerField()
     Floor = models.IntegerField()
     Category_id = models.ForeignKey( Category, on_delete=models.CASCADE)
+    is_active = models.BooleanField(default=True)
 
     def __str__(self):
         return self.Short_name  
@@ -37,7 +38,7 @@ class User(AbstractUser):
         role = models.CharField(
             max_length=50,
             choices=ROLE_CHOICES,
-            default='Client'
+            default='client'
         )
 
         phone = models.CharField(
@@ -64,25 +65,46 @@ class User(AbstractUser):
 class Booking(models.Model):
 
     STATUS_CHOICES = (
-            ('UPCOMING', 'Upcoming'),
-            ('CANCELLED', 'Cancelled'),
-            ('COMPLETED', 'Completed'),
-        )
-
+        ('UPCOMING', 'Upcoming'),
+        ('CHECKED_IN', 'Checked In'),
+        ('CANCELLED', 'Cancelled'),
+        ('COMPLETED', 'Completed'),
+    )
 
     Booking_id = models.AutoField(primary_key=True)
-    User_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    User_id = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     Room_id = models.ForeignKey(Room, on_delete=models.CASCADE)
     Start_time = models.DateTimeField()
     End_time = models.DateTimeField()
     Status = models.CharField(
-        max_length=20, 
-        choices=STATUS_CHOICES, 
+        max_length=20,
+        choices=STATUS_CHOICES,
         default='UPCOMING'
     )
 
-    def __str__(self):
-        return f"Booking {self.Booking_id} by {self.User_id} for {self.Room_id}"      
+    Guest_first_name = models.CharField(max_length=100, blank=True, null=True)
+    Guest_last_name = models.CharField(max_length=100, blank=True, null=True)
+    Guest_email = models.EmailField(blank=True, null=True)
+    Guest_phone = models.CharField(max_length=20, blank=True, null=True)
 
+    def __str__(self):
+        return f"Booking {self.Booking_id} for {self.Room_id}"
     
-    
+class CheckIn(models.Model):
+    CheckIn_id = models.AutoField(primary_key=True)
+    Booking_id = models.ForeignKey(
+        Booking,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="checkins"
+    )
+
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
+    phone = models.CharField(max_length=20)
+    email = models.EmailField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.first_name} {self.last_name} - {self.phone}"

@@ -34,6 +34,7 @@ function Stars({ count = 5 }) {
 }
 
 export default function Home() {
+  const today = new Date().toISOString().split("T")[0];
   const nav = useNavigate();
 
   const [date, setDate] = useState("");
@@ -62,6 +63,7 @@ export default function Home() {
                     type="date"
                     value={date}
                     onChange={(e) => setDate(e.target.value)}
+                    min={today}
                     required
                   />
                 </div>
