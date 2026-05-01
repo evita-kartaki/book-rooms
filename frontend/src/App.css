@@ -1,0 +1,957 @@
+:root{
+  --rb-primary: #127369;
+  --rb-dark:    #10403B;
+  --rb-soft:    #8AA6A3;
+  --rb-gray:    #4C5958;
+  --rb-light:   #BFBFBF;
+
+  --rb-bg:      #f4f6f6;
+  --rb-green: var(--rb-primary, #127369);   /* fallback */
+  --rb-green-soft: rgba(18, 115, 105, 0.12);
+  --rb-green-hover: rgba(18, 115, 105, 0.18);
+}
+
+.rb-page{
+  background: var(--rb-bg);
+  color: var(--rb-gray);
+}
+
+/* HEADER */
+.rb-header{
+  background: var(--rb-primary);
+}
+
+.rb-brand{
+  color: #fff !important;
+}
+
+/*.rb-logo{
+  width: 38px;
+  height: 38px;
+  object-fit: contain;
+}*/
+.rb-logo {
+  width: 130px;
+  height: auto;
+}
+
+.navbar {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+.rb-navbar {
+  padding-top: 6px !important;
+  padding-bottom: 6px !important;
+}
+
+@media (min-width: 992px) {
+  .rb-logo {
+    width: 130px;  /* desktop */
+  }
+}
+.rb-icon-btn{
+  border: 0;
+  background: rgba(255,255,255,.30);
+  border-radius: 12px;
+  padding: .45rem .75rem;
+}
+
+.rb-burger{
+  font-size: 30px;
+  color: #fff;
+}
+
+/* Desktop menu links */
+.navbar-nav .nav-link{
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  opacity: .95;
+}
+
+
+
+/* SEARCH SECTION */
+.rb-search-section{
+  background: var(--rb-searchbg);
+}
+
+.rb-search-card{
+  border-radius: 18px;
+}
+
+/* Search button: #127369 με άσπρα γράμματα */
+/* Force override Bootstrap */
+button.rb-search-btn {
+  background-color: #127369 !important;
+  color: #fff !important;
+  font-weight: 500 !important;
+  font-size: 16px !important;
+
+  border: none !important;
+  border-radius: 999px !important;
+
+  padding: 12px 30px !important;
+  min-width: 100px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  transition: all 0.25s ease;
+}
+
+button.rb-search-btn:hover {
+  background-color: #10403B !important;
+  transform: scale(1.03);
+}
+
+button.rb-search-btn:active {
+  transform: scale(0.98);
+}
+/* Default (desktop) button stays pill */
+.rb-search-btn {
+  background: #127369;
+  color: white;
+  font-weight: 700;
+  font-size: 18px;
+
+  border: none;
+  border-radius: 999px;
+  padding: 14px 45px;
+
+  transition: all 0.25s ease;
+}
+
+/* Hover */
+.rb-search-btn:hover {
+  background: #10403B;
+}
+
+/* MOBILE FIX */
+@media (max-width: 768px) {
+
+  /* Center the button */
+  .rb-search-btn {
+    display: block;
+    margin: 15px auto 0 auto;
+
+    /* Square style */
+    border-radius: 10px !important;
+    padding: 12px 35px !important;
+
+    width: 150px; /* fixed size */
+    text-align: center;
+  }
+
+  /* Force button row to center */
+  .rb-search-card .col-12.col-md-auto {
+    text-align: center;
+  }
+}
+
+
+/* Titles */
+.rb-section-title{
+  color: var(--rb-dark);
+  letter-spacing: .2px;
+}
+
+/* Review cards */
+.rb-card{
+  border-radius: 18px;
+  overflow: hidden;
+}
+
+.rb-avatar{
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  background: #e9f2f1;
+  display: grid;
+  place-items: center;
+}
+
+/* CATEGORY CARDS: τετράγωνες φωτογραφίες */
+.rb-category-card{
+  position: relative;
+  border-radius: 18px;
+  overflow: hidden;
+  background: #fff;
+
+  aspect-ratio: 1 / 1; /* ΤΕΤΡΑΓΩΝΟ */
+}
+
+/* Η εικόνα γεμίζει το τετράγωνο */
+.rb-category-img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transform: scale(1);
+  transition: transform .35s ease;
+}
+
+/* Hover overlay */
+.rb-category-overlay{
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0);
+  display: grid;
+  place-items: center;
+  transition: background .35s ease;
+}
+
+.rb-category-text{
+  color: #fff;
+  font-weight: 800;
+  font-size: 1.1rem;
+  letter-spacing: .3px;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity .35s ease, transform .35s ease;
+  text-align: center;
+  padding: 0 12px;
+}
+
+.rb-category-card:hover .rb-category-img{
+  transform: scale(1.05);
+}
+
+.rb-category-card:hover .rb-category-overlay{
+  background: rgba(0,0,0,0.55);
+}
+
+.rb-category-card:hover .rb-category-text{
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* FOOTER */
+.rb-footer{
+  background: var(--rb-primary);
+  color: #0f3f3a;
+}
+
+.rb-footer-link{
+  color: #0f3f3a;
+  text-decoration: none;
+}
+
+.rb-footer-link:hover{
+  text-decoration: underline;
+}
+
+/* Mobile Footer Center */
+@media (max-width: 768px) {
+  .rb-footer {
+    text-align: center;
+  }
+
+  .rb-footer ul {
+    padding-left: 0;
+  }
+
+  .rb-footer li {
+    margin-bottom: 8px;
+  }
+}
+
+.rb-rooms-list{
+  display: grid;
+  gap: 18px;
+}
+
+.rb-room-item{
+  background: #fff;
+  border-radius: 18px;
+  padding: 18px;
+  box-shadow: 0 6px 18px rgba(0,0,0,.06);
+}
+
+.rb-room-img{
+  width: 100%;
+  border-radius: 14px;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+}
+
+.rb-room-title{
+  color: var(--rb-dark);
+  margin-bottom: 10px;
+}
+
+.rb-room-text{
+  color: var(--rb-gray);
+  line-height: 1.6;
+}
+
+/* TEACHING ROOMS PAGE */
+.rb-room-card{
+  background: #fff;
+  border-radius: 18px;
+  overflow: hidden;
+}
+
+.rb-room-img{
+  width: 100%;
+  height: auto;            /* να ακολουθεί το ύψος του περιεχομένου */
+  aspect-ratio: 4 / 3;     /* πιο “μαζεμένη” εικόνα */
+  object-fit: cover;
+  display: block;
+}
+.rb-room-card .row{
+  align-items: flex-start; /* να ξεκινάνε πάνω-πάνω μαζί */
+}
+
+
+.rb-room-body{
+  padding: 18px;
+}
+
+.rb-room-title{
+  color: var(--rb-dark);
+}
+
+.rb-room-text{
+  color: var(--rb-gray);
+  line-height: 1.6;
+}
+
+/* Mobile */
+@media (max-width: 768px){
+  .rb-room-body{
+    padding: 14px;
+  }
+  .rb-room-img{
+    min-height: 200px;
+  }
+}
+.rb-room-click {
+  cursor: pointer;
+  transition: transform 0.25s ease;
+}
+
+.rb-room-click:hover {
+  transform: scale(1.02);
+}
+
+/* TEACHING ROOMS A (A1-A2-A3) */
+.rb-tr-card{
+  background: #fff;
+  border-radius: 18px;
+  overflow: hidden;
+}
+
+.rb-tr-grid{
+  display: grid;
+  grid-template-columns: 420px 1fr; /* εικόνα + κείμενο */
+  gap: 18px;
+  align-items: start;
+  padding: 18px;
+}
+
+.rb-tr-imgwrap{
+  border-radius: 18px;
+  overflow: hidden;
+}
+
+.rb-tr-img{
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  display: block;
+}
+
+.rb-tr-title{
+  color: var(--rb-dark);
+}
+
+.rb-tr-text{
+  color: var(--rb-gray);
+  line-height: 1.7;
+}
+
+/* Mobile: εικόνα πάνω, κείμενο κάτω */
+@media (max-width: 768px){
+  .rb-tr-grid{
+    grid-template-columns: 1fr;
+    padding: 14px;
+  }
+
+  .rb-tr-img{
+    aspect-ratio: 16 / 9;
+  }
+}
+/* Desktop hover background (απαλό γκρι) */
+.navbar-nav .nav-link:hover{
+  opacity: 1;
+  text-decoration: none; /* βγάζουμε underline */
+  background: #f2f2f2;
+  color: var(--rb-dark) !important;
+  border-radius: 10px;
+  padding: 6px 10px;
+}
+
+/* Dropdown */
+.rb-dropdown{
+  position: relative;
+}
+
+.rb-dropdown-toggle{
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.rb-dropdown-menu{
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 270px;
+  background: #fff;
+  border-radius: 12px;
+  padding: 8px;
+  margin-top: 10px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.15);
+  display: none;
+  z-index: 9999;
+}
+
+.rb-dropdown:hover .rb-dropdown-menu{
+  display: block;
+}
+
+.rb-dropdown-item{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 12px;
+  border-radius: 10px;
+  color: var(--rb-dark);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.rb-dropdown-item:hover{
+  background: #f2f2f2;
+}
+
+/* Submenu */
+.rb-submenu{
+  position: relative;
+}
+
+.rb-submenu-menu{
+  position: absolute;
+  top: 0;
+  left: 100%;
+  min-width: 270px;
+  background: #fff;
+  border-radius: 12px;
+  padding: 8px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.15);
+  display: none;
+}
+
+.rb-submenu:hover .rb-submenu-menu{
+  display: block;
+}
+
+.rb-arrow{
+  opacity: .7;
+  font-weight: 700;
+}
+/* Remove bullets from dropdown menus */
+.rb-dropdown-menu,
+.rb-submenu-menu{
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.rb-dropdown-menu li,
+.rb-submenu-menu li{
+  list-style: none;
+}
+
+/* Mobile dropdown arrow position */
+.rb-arrow {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 14px;
+}
+
+/* ABOUT PAGE */
+.rb-about-card {
+  border-radius: 18px;
+}
+
+.rb-about-img {
+  width: 100%;
+  border-radius: 18px;
+  object-fit: cover;
+}
+
+.rb-info-box {
+  border-radius: 18px;
+  background: #fff;
+}
+
+.rb-info-box h2 {
+  color: var(--rb-primary);
+}
+
+.rb-about-list {
+  padding-left: 18px;
+}
+
+.rb-about-list li {
+  margin-bottom: 8px;
+}
+/* MAP */
+.rb-map-card {
+  border-radius: 18px;
+  overflow: hidden;
+}
+
+.rb-map {
+  width: 100%;
+  height: 450px;
+  border: 0;
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .rb-map {
+    height: 300px;
+  }
+}
+/* FAQ */
+.rb-faq-item{
+  border: 1px solid rgba(16, 64, 59, 0.12);
+  border-radius: 14px;
+  background: #fff;
+  margin-bottom: 12px;
+  overflow: hidden;
+}
+
+.rb-faq-q{
+  width: 100%;
+  border: 0;
+  background: transparent;
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 700;
+  color: var(--rb-dark);
+  text-align: left;
+}
+
+.rb-faq-q:hover{
+  background: rgba(191,191,191,0.18); /* απαλό γκρι από την παλέτα */
+}
+
+.rb-faq-arrow{
+  color: var(--rb-gray);
+  font-size: 12px;
+}
+
+.rb-faq-a{
+  padding: 0 16px 14px 16px;
+  color: var(--rb-gray);
+  line-height: 1.6;
+}
+/* AUTH PAGES (Login/Register) */
+.rb-auth-card {
+  max-width: 420px;
+  border-radius: 18px;
+}
+/* BOOKING PAGE */
+.rb-page-title{
+  margin-top: 10px;
+}
+
+/* block spacing */
+.rb-booking-block{
+  max-width: 980px;
+  margin: 0 auto;
+}
+
+.rb-booking-h{
+  color: var(--rb-dark);
+  margin-bottom: 12px;
+}
+
+/* επιλογές (κουτάκια) */
+.rb-choice-panel{
+  background: #fff;
+  border-radius: 18px;
+  padding: 18px;
+  box-shadow: 0 4px 14px rgba(0,0,0,.06);
+}
+
+.rb-choice-row{
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.rb-choice-btn{
+  background: rgba(18,115,105,.45);
+  color: #fff;
+  border: 0;
+  border-radius: 16px;
+  padding: 18px 22px;
+  font-weight: 800;
+  min-width: 200px;
+  transition: transform .15s ease, background .2s ease;
+}
+
+.rb-choice-btn:hover{
+  transform: translateY(-1px);
+  background: rgba(18,115,105,.60);
+}
+
+.rb-choice-btn.is-active{
+  background: var(--rb-primary);
+}
+
+/* calendar */
+.rb-calendar{
+  border-radius: 18px;
+  overflow: hidden;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.rb-cal-head{
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.rb-cal-title{
+  font-weight: 800;
+  color: var(--rb-dark);
+  text-transform: capitalize;
+}
+
+.rb-cal-note{
+  font-size: 12px;
+  color: #6c757d;
+}
+
+.rb-cal-grid{
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 10px;
+}
+
+.rb-cal-dow{
+  font-weight: 800;
+  color: var(--rb-dark);
+  text-align: center;
+}
+
+.rb-cal-cell{
+  height: 44px;
+  border-radius: 12px;
+  border: 2px solid rgba(16,64,59,.25);
+  background: #f6f7f7;
+  font-weight: 700;
+  color: var(--rb-dark);
+  transition: transform .12s ease, background .2s ease;
+}
+
+.rb-cal-cell:hover{
+  transform: translateY(-1px);
+}
+
+.rb-cal-cell.is-selected{
+  background: var(--rb-primary);
+  color: #fff;
+  border-color: var(--rb-primary);
+}
+
+.rb-cal-cell.is-disabled{
+  opacity: .35;
+  cursor: not-allowed;
+}
+
+/* time box */
+.rb-time{
+  border-radius: 18px;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.rb-time-label{
+  font-weight: 900;
+  color: var(--rb-dark);
+  min-width: 50px;
+}
+
+/* pill input (όπως mockup) */
+.rb-pill-input{
+  border-radius: 999px !important;
+  padding: 14px 18px !important;
+  background: #f2f2f2 !important;
+  border: 0 !important;
+}
+
+/* confirm button */
+.rb-confirm-btn{
+  background-color: #127369 !important;
+  color: #fff !important;
+  font-weight: 800 !important;
+  border: none !important;
+  border-radius: 999px !important;
+  padding: 14px 26px !important;
+  transition: transform .15s ease, background .2s ease;
+}
+
+.rb-confirm-btn:hover{
+  background-color: #10403B !important;
+  transform: scale(1.02);
+}
+
+/* responsive tweaks */
+@media (max-width: 768px){
+  .rb-choice-btn{
+    min-width: 150px;
+    padding: 14px 16px;
+  }
+
+  .rb-cal-head{
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+/* δώσε λίγο “καρτέλα” feeling στα 2ο/3ο επίπεδα */
+.rb-subpanel{
+  border: 2px dashed rgba(16,64,59,.18);
+}
+
+/* Mobile: να φαίνονται 2-2 τα κουμπιά (σαν desktop λογική) */
+@media (max-width: 768px){
+  .rb-choice-row{
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .rb-choice-btn{
+    min-width: 0; /* για να χωράει στο grid */
+    width: 100%;
+    padding: 14px 14px;
+    font-size: 14px;
+  }
+}
+
+
+
+/* Κάνε την κάρτα πιο "σφιχτή" (λιγότερο κενό) */
+.rb-calendar .card-body{
+  padding: 14px 16px;   /* πριν ήταν πιο μεγάλο */
+}
+
+/* Κράτα το header πιο compact */
+.rb-cal-head{
+  margin-bottom: 10px;
+}
+
+/* Το wrapper του datepicker να μην αφήνει "άδειο χώρο" */
+.rb-cal-grid{
+  display: flex;
+  justify-content: center;
+
+}
+
+/* Βασικό container */
+.rb-cal-grid .react-datepicker{
+  width: auto;
+  border: 0 !important;
+  background: transparent !important;
+  font-family: inherit;
+  color: var(--rb-green);
+}
+
+/* Header του datepicker (μήνας) */
+.rb-cal-grid .react-datepicker__header{
+  background: transparent !important;
+  border-bottom: 0 !important;
+  padding: 0 !important;
+}
+
+/* Τίτλος μήνα */
+.rb-cal-grid .react-datepicker__current-month{
+  color: var(--rb-green) !important;
+  font-weight: 800;
+  font-size: 16px;
+}
+
+/* Βελάκια navigation */
+.rb-cal-grid .react-datepicker__navigation-icon::before{
+  border-color: var(--rb-green) !important;
+}
+.rb-cal-grid .react-datepicker__navigation:hover *::before{
+  border-color: var(--rb-green) !important;
+}
+
+/* Ημέρες εβδομάδας (Su Mo...) */
+.rb-cal-grid .react-datepicker__day-name{
+  color: var(--rb-green) !important;
+  font-weight: 700;
+  font-size: 13px;
+}
+
+/* Grid: κάνε το πιο "μεγάλο" για να γεμίζει την κάρτα */
+.rb-cal-grid .react-datepicker__month{
+  margin: 8px 0 0 0 !important;
+}
+.rb-cal-grid .react-datepicker__week{
+  display: grid;
+  grid-template-columns: repeat(7, 44px); /* μεγαλώνει το ημερολόγιο */
+  justify-content: center;
+  gap: 6px;
+}
+.rb-cal-grid .react-datepicker__day-names{
+  display: grid;
+  grid-template-columns: repeat(7, 44px);
+  justify-content: center;
+  gap: 6px;
+  margin-top: 6px;
+}
+
+/* Κελιά ημέρας */
+.rb-cal-grid .react-datepicker__day{
+  width: 44px !important;
+  height: 44px !important;
+  line-height: 44px !important;
+  margin: 0 !important;
+  border-radius: 12px !important;
+  color: var(--rb-green) !important;   /* αριθμοί πράσινοι */
+  font-weight: 700;
+}
+
+/* Hover */
+.rb-cal-grid .react-datepicker__day:hover{
+  background: var(--rb-green-hover) !important;
+  color: var(--rb-green) !important;
+}
+
+/* Disabled */
+.rb-cal-grid .react-datepicker__day--disabled{
+  opacity: 0.30 !important;
+  cursor: not-allowed !important;
+}
+
+/* Selected day: όχι μπλε — βάλε το site green */
+.rb-cal-grid .react-datepicker__day--selected,
+.rb-cal-grid .react-datepicker__day--keyboard-selected{
+  background: var(--rb-green) !important;
+  color: #fff !important;
+}
+
+/* Σήμερα: να φαίνεται διακριτικά */
+.rb-cal-grid .react-datepicker__day--today{
+  border: 2px solid var(--rb-green) !important;
+  background: var(--rb-green-soft) !important;
+}
+
+/* Μικρό tweak για να μην "απλώνει" το datepicker container */
+.rb-cal-grid .react-datepicker__month-container{
+  width: auto !important;
+}
+.rb-calendar-compact{
+  max-width: 520px;     /* κρατά την κάρτα "μαζεμένη" */
+  margin: 0 auto;       /* κέντρο */
+}
+.rb-info-card {
+  border-radius: 18px;
+}
+
+.rb-dark-title {
+  color: var(--rb-dark);
+}
+.rb-room-card {
+  border-radius: 14px;
+  overflow: hidden; /* για να “κόβεται” σωστά η εικόνα */
+}
+
+.rb-room-img-wrap {
+  width: 180px;
+  min-width: 180px;
+  height: 140px;
+  background: #f3f4f6;
+}
+
+.rb-room-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* ΚΛΕΙΔΙ για να μην παραμορφώνεται */
+  display: block;
+}
+
+@media (max-width: 576px) {
+  .rb-room-img-wrap {
+    width: 100%;
+    min-width: 100%;
+    height: 180px;
+  }
+}
+.rb-confirm-photo {
+  width: 120px;
+  height: 90px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 1px solid #e5e7eb;
+  display: block;         /* να μην αφήνει κενά */
+  margin-top: 4px;        /* λίγο αέρας κάτω από το label */
+}
+
+/* Desktop */
+.rb-buttons-wrap {
+  align-items: left;
+}
+
+.rb-buttons-wrap .btn {
+  width: auto;
+  min-width: 180px;
+}
+
+/* Mobile */
+@media (max-width: 576px) {
+  .rb-buttons-wrap {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .rb-buttons-wrap .btn {
+    width: 80%;
+    max-width: 280px;
+  }
+}
+
+/* Hover effect */
+.rb-return-btn:hover {
+  background-color: #155e54;   /* λίγο πιο σκούρο */
+  color: white;
+  transform: translateY(-2px); /* μικρό lift */
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+}
+
+/* Για να μη γίνεται μπλε underline σαν link */
+.rb-return-btn:focus,
+.rb-return-btn:active {
+  color: white;
+  text-decoration: none;
+}
